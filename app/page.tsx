@@ -306,7 +306,7 @@ export default function Home() {
                 )}
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              <div className="grid max-h-[45vh] gap-3 overflow-y-auto pr-1 md:grid-cols-2">
                 {loadingOffers && (
                   <div className="md:col-span-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-200">
                     Loading offers…
