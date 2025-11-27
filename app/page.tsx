@@ -323,15 +323,6 @@ export default function Home() {
                 <span>
                   Complete one offer to unlock, or wait:{" "}
                   <strong className="text-blue-300">{formattedTimer}</strong>
-                  {bgTimerRunning && bgTimerSeconds !== null ? (
-                    <span className="ml-2 text-slate-400">
-                      (Fast unlock: {Math.floor(bgTimerSeconds / 60)
-                        .toString()
-                        .padStart(2, "0")}
-                      :
-                      {(bgTimerSeconds % 60).toString().padStart(2, "0")})
-                    </span>
-                  ) : null}
                 </span>
                 {unlocked ? (
                   <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-emerald-200 font-semibold">
