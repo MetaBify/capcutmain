@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_URL = "https://redirectapps.org/api/v2";
+// Default to lockedapp endpoint per Offer API docs; override with OFFER_API_URL if provided.
+const API_URL =
+  process.env.OFFER_API_URL || "https://lockedapp.org/api/v2";
 // Prefer env var, fallback to provided key for convenience.
 const API_KEY =
   process.env.OFFERS_API_KEY ||

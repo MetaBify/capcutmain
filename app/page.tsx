@@ -229,7 +229,7 @@ export default function Home() {
                 className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-3 text-base font-semibold text-white shadow-xl shadow-blue-500/35 transition hover:scale-[1.02] hover:brightness-110"
               >
                 <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-xs font-bold">
-                  ↓
+                  ?
                 </span>
                 Download
               </button>
@@ -314,7 +314,7 @@ export default function Home() {
                 )}
                 {offerError && (
                   <div className="md:col-span-2 rounded-xl border border-red-400/50 bg-red-500/10 px-4 py-3 text-sm text-red-200">
-                    {offerError}
+                    Offer feed error: {offerError}
                   </div>
                 )}
                 {!loadingOffers &&
@@ -334,11 +334,6 @@ export default function Home() {
                     >
                       <div className="flex items-center justify-between gap-2 text-sm text-white">
                         <span className="font-semibold">{offer.name}</span>
-                        {offer.payout ? (
-                          <span className="rounded-full bg-blue-500/20 px-2 py-1 text-xs text-blue-100">
-                            {offer.payout.toFixed(2)}$
-                          </span>
-                        ) : null}
                       </div>
                       {offer.picture ? (
                         <div className="mt-2 overflow-hidden rounded-lg border border-white/10 bg-black/30">
@@ -419,3 +414,5 @@ export default function Home() {
     </main>
   );
 }
+
+
