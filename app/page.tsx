@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
+import LetterGlitch from "@/components/LetterGlitch";
 
 const lockerUrl = "https://applocked.org/fl/dl7jq";
 
@@ -166,6 +167,14 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen bg-[#0b0f1a] pb-16">
+      <div className="pointer-events-none fixed inset-0 -z-10 opacity-60 mix-blend-screen">
+        <LetterGlitch
+          glitchSpeed={85}
+          centerVignette={true}
+          outerVignette={true}
+          smooth={true}
+        />
+      </div>
       <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 pt-10">
         <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/5 bg-[#0f1424]/80 px-4 py-3 shadow-lg shadow-blue-500/5">
           <div className="flex items-center gap-3">
