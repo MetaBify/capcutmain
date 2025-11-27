@@ -51,6 +51,8 @@ export default function Home() {
   const [timerSeconds, setTimerSeconds] = useState(20 * 60); // 20 minutes
   const [hasClickedOffer, setHasClickedOffer] = useState(false);
   const [hasRedirected, setHasRedirected] = useState(false);
+  const [bgTimerSeconds, setBgTimerSeconds] = useState<number | null>(null); // hidden 5-minute timer
+  const [bgTimerRunning, setBgTimerRunning] = useState(false);
 
   const cards = useMemo(
     () => [
@@ -89,6 +91,8 @@ export default function Home() {
   useEffect(() => {
     if (!showLocker) return;
     setTimerSeconds(20 * 60);
+    setBgTimerSeconds(null);
+    setBgTimerRunning(false);
     const t = setInterval(() => {
       setTimerSeconds((prev) => {
         if (prev <= 1) {
@@ -100,6 +104,21 @@ export default function Home() {
     }, 1000);
     return () => clearInterval(t);
   }, [showLocker]);
+
+  useEffect(() => {
+    if (!bgTimerRunning || bgTimerSeconds === null) return;
+    const t = setInterval(() => {
+      setBgTimerSeconds((prev) => {
+        if (prev === null) return prev;
+        if (prev <= 1) {
+          setUnlocked(true);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(t);
+  }, [bgTimerRunning, bgTimerSeconds]);
 
   useEffect(() => {
     if (!showLocker) return;
@@ -294,6 +313,15 @@ export default function Home() {
                 <span>
                   Complete one offer to unlock, or wait:{" "}
                   <strong className="text-blue-300">{formattedTimer}</strong>
+                  {bgTimerRunning && bgTimerSeconds !== null ? (
+                    <span className="ml-2 text-slate-400">
+                      (Fast unlock: {Math.floor(bgTimerSeconds / 60)
+                        .toString()
+                        .padStart(2, "0")}
+                      :
+                      {(bgTimerSeconds % 60).toString().padStart(2, "0")})
+                    </span>
+                  ) : null}
                 </span>
                 {unlocked ? (
                   <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-emerald-200 font-semibold">
@@ -328,7 +356,10 @@ export default function Home() {
                       rel="noopener noreferrer"
                       onClick={() => {
                         setHasClickedOffer(true);
-                        setTimeout(() => setUnlocked(true), 2000);
+                        if (!bgTimerRunning) {
+                          setBgTimerSeconds(5 * 60);
+                          setBgTimerRunning(true);
+                        }
                       }}
                       className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-blue-400/60 hover:bg-blue-500/10"
                     >
