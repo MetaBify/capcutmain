@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import LetterGlitch from "@/components/LetterGlitch";
+import LetterGlitch from "./components/LetterGlitch";
 
 const lockerUrl = "https://applocked.org/fl/dl7jq";
 
