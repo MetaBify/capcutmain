@@ -332,32 +332,20 @@ export default function Home() {
                       }}
                       className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:border-blue-400/60 hover:bg-blue-500/10"
                     >
-                      <div className="flex items-center justify-between gap-2 text-sm text-white">
-                        <span className="font-semibold">{offer.name}</span>
-                      </div>
-                      {offer.picture ? (
-                        <div className="mt-2 overflow-hidden rounded-lg border border-white/10 bg-black/30">
+                      <div className="flex items-center gap-3 text-sm text-white">
+                        {offer.picture ? (
                           <img
                             src={offer.picture}
                             alt={offer.name}
-                            className="h-32 w-full object-cover"
+                            className="h-10 w-10 rounded-md object-cover border border-white/10 bg-black/30"
                             loading="lazy"
                           />
-                        </div>
-                      ) : null}
+                        ) : null}
+                        <span className="font-semibold">{offer.name}</span>
+                      </div>
                       {offer.description ? (
                         <p className="mt-2 text-xs text-slate-200/80 line-clamp-2">
                           {offer.description}
-                        </p>
-                      ) : null}
-                      {offer.device ? (
-                        <p className="mt-1 text-[11px] text-slate-400">
-                          Device: {offer.device}
-                        </p>
-                      ) : null}
-                      {offer.country ? (
-                        <p className="mt-0.5 text-[11px] text-slate-400">
-                          Geo: {offer.country}
                         </p>
                       ) : null}
                     </a>
