@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(cuid())
+  email      String      @unique
+  username   String      @unique
+  password   String
+  createdAt  DateTime    @default(now())
+  balance    Float       @default(0)
+  pending    Float       @default(0)
+  isAdmin    Boolean     @default(false)
+  chatMutedUntil DateTime?
+  signupBonusAwarded Boolean @default(false)
+  leads      OfferLead[]
+  messages   ChatMessage[]
+  rainEvents RainEvent[] @relation("RainCreated")
+  rainClaims RainClaim[]
+}
+
+model OfferLead {
+  id           String      @id @default(cuid())
+  externalId   String      @unique
+  offerId      String
+  points       Float       @default(0)
+  status       String      @default("PENDING")
+  availableAt  DateTime
+  awardedAt    DateTime?
+  createdAt    DateTime    @default(now())
+  user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+  raw          String?
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  content   String
+  level     Int
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+}
+
+model RainEvent {
+  id          String      @id @default(cuid())
+  amount      Float
+  isActive    Boolean     @default(true)
+  durationMinutes Int     @default(5)
+  expiresAt   DateTime
+  createdAt   DateTime    @default(now())
+  createdBy   User?       @relation("RainCreated", fields: [createdById], references: [id])
+  createdById String?
+  claims      RainClaim[]
+}
+
+model RainClaim {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  rain      RainEvent @relation(fields: [rainId], references: [id])
+  rainId    String
+
+  @@unique([rainId, userId])
+}
