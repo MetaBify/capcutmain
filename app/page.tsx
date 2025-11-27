@@ -166,8 +166,9 @@ export default function Home() {
   }, [unlocked, hasRedirected]);
 
   return (
-    <main className="relative min-h-screen bg-[#0b0f1a] pb-16">
-      <div className="pointer-events-none fixed inset-0 -z-10 opacity-60 mix-blend-screen">
+    <main className="relative min-h-screen overflow-hidden pb-16">
+      <div className="absolute inset-0 -z-20 bg-[#0b0f1a]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 opacity-55 mix-blend-screen">
         <LetterGlitch
           glitchSpeed={85}
           centerVignette={true}
@@ -175,7 +176,7 @@ export default function Home() {
           smooth={true}
         />
       </div>
-      <div className="mx-auto flex max-w-5xl flex-col gap-8 px-4 pt-10">
+      <div className="relative z-10 mx-auto flex max-w-5xl flex-col gap-8 px-4 pt-10">
         <header className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-white/5 bg-[#0f1424]/80 px-4 py-3 shadow-lg shadow-blue-500/5">
           <div className="flex items-center gap-3">
             <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-white/5 ring-1 ring-white/10">
