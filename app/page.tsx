@@ -266,6 +266,25 @@ export default function Home() {
           </div>
         </section>
 
+        <div className="rounded-3xl border border-white/10 bg-[#0f1424]/90 px-5 py-6 shadow-2xl shadow-blue-500/10 backdrop-blur-sm">
+          <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-xs font-semibold text-slate-200">
+            <span className="inline-block h-2 w-2 rounded-full bg-blue-400" />
+            VirusTotal Check
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-black/30 p-2">
+            <img
+              src="/virustotal.png"
+              alt="VirusTotal scan"
+              className="w-full rounded-xl border border-white/5 bg-black/40"
+              loading="lazy"
+            />
+          </div>
+          <p className="mt-3 text-xs text-slate-300">
+            Latest scan: clean. Screenshot included for transparency; you can
+            always verify hashes yourself.
+          </p>
+        </div>
+
         <div className="grid gap-6 md:grid-cols-2">
           {cards.slice(0, 2).map((card) => (
             <InfoCard key={card.title} {...card} />
@@ -284,7 +303,7 @@ export default function Home() {
             <p className="text-sm text-slate-200/90">
               If the download locker does not load inside the page, use the
               "Open in new tab" link inside the popup. You can switch patch ON/OFF
-              anytime — the app keeps .bak backups of the DLLs it modifies.
+              anytime - the app keeps .bak backups of the DLLs it modifies.
             </p>
           </div>
         </div>
